@@ -6,7 +6,7 @@
 /*   By: aloubar <aloubar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 16:06:54 by aloubar           #+#    #+#             */
-/*   Updated: 2021/01/04 17:23:53 by aloubar          ###   ########.fr       */
+/*   Updated: 2021/02/17 10:09:52 by aloubar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,38 @@
 # include <stdlib.h>
 # include "libft.h"
 # include <stdarg.h>
+# include <stdio.h>
 
 typedef	struct	 s_info
 {
 	va_list		args;
 	int			width;
-	int			precision;
 	int			return_value;
 	int			i;
 	char		spe;
+	int			zero;
+	int			minus;
+	int			star;
+	int			dot;
+	int			dot_exist;
+	int			bdot;
+	char		buff[1024];
+	int			j;
+	int			len_variable;
+	int			len_width;
 }				t_info;
+
+t_info			*ft_parse_minus(t_info *info);
+t_info			*ft_parse_star(t_info *info);
+t_info			*ft_parse_dot(t_info *info, const char *str);
+t_info			*ft_parse_nb(t_info *info, char c);
+int				ft_check_type(char c);
+int				ft_check_flags(char c);
+void			ft_buff_no_flags(t_info *info, char c);
+void			ft_add_to_buff(t_info *info, char *str, int len);
+void			ft_display_buff(t_info *info);
+void			ft_treat_char(t_info *info, int c);
+char			*ft_treat_width(t_info *info);
+int				ft_printf(const char *format, ...);
 
 #endif
