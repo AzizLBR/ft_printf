@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 #include <limits.h>
 
 
@@ -15,10 +15,10 @@ int		main(void)
 	ft_printf("test %% avec width de 15 et 0 : %015%\n");
 	ft_printf("Test ft_printf\n");
 	printf("------------------ %%c -----------------\n\n");
-	*/
+	
 	printf("Vrai : |%c|\n", c);
 	ft_printf("%c", c);
-	/*printf("\nVrai : |%c|\n", c);
+	printf("\nVrai : |%c|\n", c);
 	ft_printf("Faux : |%c|\n", c);
 	printf("|%-----5c|\n", -2147483648);
 	ft_printf("|%-----5c|\n", -2147483648);
@@ -54,18 +54,30 @@ int		main(void)
 	ft_printf("|%-15c|\n", 0);
 	printf("|%0*c|\n", -15, -2147483648);
 	ft_printf("|%0*c|\n", -15, -2147483648);
-	/*printf("\n---------------- %%s -----------------\n\n");
-	printf("test vrai printf %%s sans flags : |%s|\n", str);
-	ft_printf("Test %%s sans flags : |%s|\n", str);
-	printf("Test vrai printf %%s avec width de 1 : |%1s|\n", str);
-	ft_printf("Test %%s avec width de 1 : |%1s|\n", str);
-	printf("Test vrai printf %%s avec width de 14 : |%14s|\n", str);
-	ft_printf("Test %%s avec width de 14 : |%14s|\n", str);
-	printf("Test vrai printf %%s avec width de 0 : |%0s|\n", str);
-	ft_printf("Test %%s avec width de 0 : |%0s|\n", str);
-	printf("Test vrai printf %%s avec - et width de 18 : |%-18s|\n", str);
-	ft_printf("test %%s avec - et width de 18 : |%-18s|\n", str);
-	printf("Test vrai printf %%s avec 0 * et width de 18 : |%0*s|\n", 18, str);
+	*/
+	printf("\n---------------- %%s -----------------\n\n");
+	/*printf("test vrai printf sans flags : |%s|\n", str);
+	ft_printf("Test  sans flags : |%s|\n", str);
+	printf("Test vrai printf  avec width de 1 : |%1s|\n", str);
+	ft_printf("Test avec width de 1 : |%1s|\n", str);
+	printf("Test vrai printf  avec width de 14 : |%14s|\n", str);
+	ft_printf("Test  avec width de 14 : |%14s|\n", str);
+	printf("Test vrai printf  avec width de 0 : |%0s|\n", str);
+	ft_printf("Test  avec width de 0 : |%0s|\n", str);
+	printf("Test vrai printf  avec - et width de 18 : |%-18s|\n", str);
+	ft_printf("test  avec - et width de 18 : |%-18s|\n", str);
+	printf("test avec width de 15, precision de 0: |%15.0s|\n", str);
+	ft_printf("test avec width de 15, precision de 0: |%15.0s|\n", str);
+	printf("test avec width de 15, precision de 6, str NULL : |%15.6s|\n", test);
+	ft_printf("test avec width de 15, precision de 6, str NULL : |%15.6s|\n", test);
+	printf("test int de base juste pour voir l'itoa : |%d\n", 2147483647);
+	ft_printf("test int de base juste pour voir l'itoa : |%d\n", 2147483647);
+*/
+	printf("precision de 0, no args le vrai : |%.d|\n", 0);
+	ft_printf("precision de 0, no args le mien: |%.d|\n", 0);
+	/*
+	ft_printf("width de 15, precision de -6, int min le vrai : |%0*.*d|\n", 15, -6, INT_MIN);
+		printf("Test vrai printf %%s avec 0 * et width de 18 : |%0*s|\n", 18, str);
 	ft_printf("test %%s avec 0 * et width de 18 : |%0*s|\n", 18, str);
 	printf("Test vrai printf %%s avec 0 * et width de 4 : |%0*s|\n", 4, str);
 	ft_printf("test %%s avec 0 * et width de 4 : |%0*s|\n", 4, str);
@@ -90,6 +102,7 @@ int		main(void)
 	ft_printf("test %%s avec precision de 22.4 et 0 : %022.4s\n", str);
 	printf("Vrai : |%s|\n", "Coco Toto");
 	ft_printf("|%s|\n", "Coco Toto");
+	/*
 	ft_printf("\n-------------- %%p ------------\n\n");
 	ft_printf("test %%p : %p\n", &str);
 	printf("test vrai printf %%p : %p\n", &str);

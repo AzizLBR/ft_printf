@@ -6,7 +6,7 @@
 #    By: aloubar <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/12 14:28:54 by aloubar           #+#    #+#              #
-#    Updated: 2021/02/17 09:46:33 by aloubar          ###   ########.fr        #
+#    Updated: 2021/02/18 13:52:53 by aloubar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,11 @@ LIBFT_H		= 	-I includes/libft.h
 
 SRCS	 	=	ft_printf.c\
 				buffer_managment.c\
-				convert_char.c\
+				convert_char_string.c\
 				ft_printf_utils.c\
 				parser_flags.c\
 				treat_width.c\
+				convert_int.c\
 
 NAME 		=	libftprintf.a
 

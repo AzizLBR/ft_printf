@@ -6,7 +6,7 @@
 /*   By: aloubar <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 13:26:15 by aloubar           #+#    #+#             */
-/*   Updated: 2021/02/17 10:17:46 by aloubar          ###   ########.fr       */
+/*   Updated: 2021/02/19 15:31:15 by aloubar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_buff_no_flags(t_info *info, char c)
 {
-	printf("Valeur de c : %c\n", c);
 	info->buff[info->j] = c;
 	if (info->j == 1024)
 		ft_display_buff(info);
@@ -25,7 +24,9 @@ void	ft_buff_no_flags(t_info *info, char c)
 void	ft_add_to_buff(t_info *info, char *str, int len)
 {
 	int i;
-	
+	if (!str)
+		while (len--)
+			*str++ = '\0';
 	info->return_value += len;
 	i = -1;
 	while (++i < len)

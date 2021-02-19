@@ -6,7 +6,7 @@
 /*   By: aloubar <aloubar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 16:10:26 by aloubar           #+#    #+#             */
-/*   Updated: 2021/02/17 10:19:23 by aloubar          ###   ########.fr       */
+/*   Updated: 2021/02/19 13:37:23 by aloubar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,45 +21,14 @@ void		ft_putflagtozero(t_info *info)
 	info->dot_exist = 1;
 	info->bdot = 0;
 	info->width = 0;
+	info->len_variable = 0;
+	info->len_width = 0;
+	info->len_dot = 0;
+	info->nb_neg = 0;
+	info->minus_done = 0;
 	info->spe = '\0';
 }
-/*
-void		ft_putstr(char *str)
-{
-	int i; 
 
-	i = -1;
-	while (str[i++])
-		write(1, &str[i], 1);
-}
-
-void		ft_display_char(t_info *info)
-{
-	char c;
-
-	c = (char)va_arg(info->args, int);
-	write(1, &c, 1);
-	info->return_value++;
-}
-
-void		ft_display_str(t_info *info)
-{
-	char *str;
-
-	str = (char *)va_arg(info->args, char *);
-	ft_putstr(str);
-}
-
-void		ft_display_int(t_info *info)
-{
-	int nb;
-
-	nb = (int)va_arg(info->args, int);
-	if (nb < 0 && info->spe == 'i')
-		return ;
-	ft_putnbr_fd(nb, 1);
-}
-*/
 void		ft_parse_flags(t_info *info, const char *str)
 {
 	while (str[info->i])
@@ -94,15 +63,16 @@ void		ft_exec_flags(t_info *info)
 {
 	if (info->spe == 'c')
 		ft_treat_char(info, va_arg(info->args, int));
-/*
-	else if (spe->info == 'd' || str[info->i] == 'i')
-		ft_display_int(info);
+
+	else if (info->spe == 'd' || info->spe  == 'i')
+		ft_treat_int(info, va_arg(info->args, int));
 //	else if (info->spe  == 'x' || info->spe == 'X' || info->spe == u)
 
-	else if (str[info->i] == 's')
-		ft_display_str(info);
+	else if (info->spe == 's')
+		ft_treat_string(info, va_arg(info->args, char *));
+	else if (info->spe == '%')
+		ft_treat_char(info, '%');
 //	else if (str[info->i] == 'p')
-*/
 }
 
 int		ft_printf(const char *format, ...)
@@ -112,6 +82,7 @@ int		ft_printf(const char *format, ...)
 
 	str = ft_strdup(format);
 	info.i = 0;
+	info.j = 0;
 	info.return_value = 0;
 	va_start(info.args, format);
 	while (str && str[info.i])

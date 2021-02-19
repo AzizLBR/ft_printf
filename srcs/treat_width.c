@@ -6,20 +6,35 @@
 /*   By: aloubar <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:32:31 by aloubar           #+#    #+#             */
-/*   Updated: 2021/02/17 09:41:44 by aloubar          ###   ########.fr       */
+/*   Updated: 2021/02/19 15:09:53 by aloubar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char	*ft_treat_width(t_info *info)
+void	ft_treat_width(t_info *info, char *str)
 {
-	char	*str;
 	int		i;
-
-	i = info->width - info->len_variable;
-	if (!(str = (char *)malloc(sizeof(char) * (i + 1))))
-		return (NULL);
+	
+	ft_bzero(str, 600);
+	if ((info->spe == 'd' && info->bdot == 1 && info->dot >= 0)
+				|| (info->spe == 'i' && info->bdot == 1 && info->dot >= 0))
+	{
+		info->zero = 0;
+	}
+	if ((info->spe == 'd' && info->nb_neg == 1) || (info->spe == 'i' &&
+				info->nb_neg == 1))
+		info->width--;
+	if (info->dot >= 0 && info->spe == 's' && info->dot < info->width
+		&& info->bdot == 1)
+	{
+		if (info->len_variable == 0)
+			i = info->width;
+		else
+			i = info->width - info->dot;
+	}
+	else
+		i = info->width - info->len_variable;
 	while (info->len_width < i)
 	{
 		if (info->zero)
@@ -28,7 +43,6 @@ char	*ft_treat_width(t_info *info)
 			str[info->len_width] = ' ';
 		info->len_width++;
 	}
-	str[info->len_width] = '\0';
-	info->len_width--;
-	return (str);
+	if (info->spe == 'c' || info->spe == '%')
+		info->len_width--;
 }

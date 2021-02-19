@@ -6,7 +6,7 @@
 /*   By: aloubar <aloubar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 17:04:03 by aloubar           #+#    #+#             */
-/*   Updated: 2021/02/17 10:08:37 by aloubar          ###   ########.fr       */
+/*   Updated: 2021/02/19 15:54:22 by aloubar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int				ft_toupper(int c);
 int				ft_tolower(int c);
 int				ft_memcmp(const void *s1, const void *s2, size_t size);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
-char			*ft_itoa(int n);
+void			ft_itoa(int n, char *str);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strchr(const char *str, int c);
 char			*ft_strrchr(const char *str, int c);
