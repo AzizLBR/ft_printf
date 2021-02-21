@@ -75,7 +75,13 @@ int		main(void)
 */
 	printf("precision de 0, no args le vrai : |%.d|\n", 0);
 	ft_printf("precision de 0, no args le mien: |%.d|\n", 0);
-	/*
+	printf("pas de precision, pas de width, args 0, le vrai : |%d|\n", 0);
+	ft_printf("pas de precision, pas de width, args 0, le vrai : |%d|\n", 0);
+	printf("precision de 0, pas de width, args 0 le vrai :|%.0d|\n", 0);
+	ft_printf("precision de 0, pas de width, args 0 le vrai :|%.0d|\n", 0);
+	printf("precision de 6, width de 15, args 0 le vrai:|%15.6d|\n", 0);
+	ft_printf("precision de 6, width de 15, args 0 le mien:|%15.6d|\n", 0);
+/*
 	ft_printf("width de 15, precision de -6, int min le vrai : |%0*.*d|\n", 15, -6, INT_MIN);
 		printf("Test vrai printf %%s avec 0 * et width de 18 : |%0*s|\n", 18, str);
 	ft_printf("test %%s avec 0 * et width de 18 : |%0*s|\n", 18, str);

@@ -6,7 +6,7 @@
 /*   By: aloubar <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:32:31 by aloubar           #+#    #+#             */
-/*   Updated: 2021/02/19 15:09:53 by aloubar          ###   ########.fr       */
+/*   Updated: 2021/02/21 16:02:18 by aloubar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ void	ft_treat_width(t_info *info, char *str)
 	ft_bzero(str, 600);
 	if ((info->spe == 'd' && info->bdot == 1 && info->dot >= 0)
 				|| (info->spe == 'i' && info->bdot == 1 && info->dot >= 0))
-	{
 		info->zero = 0;
-	}
+	if ((info->spe == 'd' && info->len_variable == 0 &&
+		info->width > info->dot) || (info->spe == 'i' &&
+		info->len_variable == 0 && info->width > info->dot))
+		info->width = info->width - info->dot;
 	if ((info->spe == 'd' && info->nb_neg == 1) || (info->spe == 'i' &&
 				info->nb_neg == 1))
 		info->width--;

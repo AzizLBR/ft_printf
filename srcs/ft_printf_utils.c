@@ -6,7 +6,7 @@
 /*   By: aloubar <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 15:15:04 by aloubar           #+#    #+#             */
-/*   Updated: 2021/02/19 15:56:03 by aloubar          ###   ########.fr       */
+/*   Updated: 2021/02/21 15:47:12 by aloubar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ static int		ft_get_size(long nb, t_info *info)
 		tmp = tmp / 10;
 		size++;
 	}
-	if (info->dot != 0)
-		if (size == 0)
-			size = 1;
+	if (nb == 0 && size == 0 && info->dot_exist == 1 && info->bdot == 0)
+		size = 1;
 	return (size);
 }
 
