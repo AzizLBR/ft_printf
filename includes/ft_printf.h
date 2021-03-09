@@ -6,7 +6,7 @@
 /*   By: aloubar <aloubar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 16:06:54 by aloubar           #+#    #+#             */
-/*   Updated: 2021/02/19 15:54:02 by aloubar          ###   ########.fr       */
+/*   Updated: 2021/03/09 10:58:51 by aloubar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ typedef	struct	 s_info
 	int			len_variable;
 	int			len_width;
 	int			len_dot;
-	int			nb_neg;
+	int			point_null;
 	int			minus_done;
+	int			flag_0;
+	int			nb_neg;
 }				t_info;
 
 t_info			*ft_parse_minus(t_info *info);
@@ -50,10 +52,17 @@ void			ft_buff_no_flags(t_info *info, char c);
 void			ft_add_to_buff(t_info *info, char *str, int len);
 void			ft_display_buff(t_info *info);
 void			ft_treat_char(t_info *info, int c);
-void			ft_treat_width(t_info *info, char *str);
+char			*ft_treat_width(t_info *info);
 int				ft_printf(const char *format, ...);
 void			ft_treat_string(t_info *info, char *str);
 void			ft_treat_int(t_info *info, int nb);
-void			ft_itoa_remixed(int n, char *str, t_info *info);
+void			ft_itoa_remixed(long long int n, char *str, t_info *info);
+void			ft_treat_point(t_info *info, unsigned long long int nb);
+char			*ft_strcpy(char *s1, char *s2);
+void			ft_add_prec_display(t_info *info, char *str, char *str_of_dot,
+				int nb);
+void			ft_precision(t_info *info,  char *str_of_dot);
+void			ft_treat_unsigned(t_info *info, unsigned int nb);
+void			ft_treat_hexa(t_info *info, unsigned int nb);
 
 #endif

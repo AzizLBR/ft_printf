@@ -6,7 +6,7 @@
 #    By: aloubar <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/12 14:28:54 by aloubar           #+#    #+#              #
-#    Updated: 2021/02/18 13:52:53 by aloubar          ###   ########.fr        #
+#    Updated: 2021/02/24 13:51:56 by aloubar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,9 @@ SRCS	 	=	ft_printf.c\
 				parser_flags.c\
 				treat_width.c\
 				convert_int.c\
+				convert_point.c\
+				convert_unsigned.c\
+				convert_hex.c\
 
 NAME 		=	libftprintf.a
 

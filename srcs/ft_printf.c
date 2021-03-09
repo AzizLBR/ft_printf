@@ -6,13 +6,13 @@
 /*   By: aloubar <aloubar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 16:10:26 by aloubar           #+#    #+#             */
-/*   Updated: 2021/02/19 13:37:23 by aloubar          ###   ########.fr       */
+/*   Updated: 2021/02/24 16:24:43 by aloubar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 
-void		ft_putflagtozero(t_info *info)
+static void		ft_putflagtozero(t_info *info)
 {
 	info->zero = 0;
 	info->minus = 0;
@@ -24,19 +24,21 @@ void		ft_putflagtozero(t_info *info)
 	info->len_variable = 0;
 	info->len_width = 0;
 	info->len_dot = 0;
-	info->nb_neg = 0;
+	info->point_null = 0;
 	info->minus_done = 0;
+	info->flag_0 = 0;
+	info->nb_neg = 0;
 	info->spe = '\0';
 }
 
-void		ft_parse_flags(t_info *info, const char *str)
+static void		ft_parse_flags(t_info *info, const char *str)
 {
 	while (str[info->i])
 	{
-		if ((!(ft_check_type(str[info->i]))) && 
-				(!(ft_check_flags(str[info->i]))) && 
+		if ((!(ft_check_type(str[info->i]))) &&
+				(!(ft_check_flags(str[info->i]))) &&
 				(!(ft_isdigit(str[info->i]))))
-			break;
+			break ;
 		if (str[info->i] == '0' && info->minus == 0 && info->width == 0)
 			info->zero = 1;
 		if (str[info->i] == '-')
@@ -44,12 +46,9 @@ void		ft_parse_flags(t_info *info, const char *str)
 			info->zero = 0;
 			info->minus = 1;
 		}
-		if (str[info->i] == '*')
-			ft_parse_star(info);
-		if (str[info->i] == '.')
-			ft_parse_dot(info, str);
-		if (ft_isdigit(str[info->i]))
-			ft_parse_nb(info, str[info->i]);
+		(str[info->i] == '*') ? ft_parse_star(info) : 0;
+		(str[info->i] == '.') ? ft_parse_dot(info, str) : 0;
+		(ft_isdigit(str[info->i])) ? ft_parse_nb(info, str[info->i]) : 0;
 		if (ft_check_type(str[info->i]))
 		{
 			info->spe = str[info->i];
@@ -59,23 +58,33 @@ void		ft_parse_flags(t_info *info, const char *str)
 	}
 }
 
-void		ft_exec_flags(t_info *info)
+static void		ft_exec_flags(t_info *info)
 {
 	if (info->spe == 'c')
 		ft_treat_char(info, va_arg(info->args, int));
-
-	else if (info->spe == 'd' || info->spe  == 'i')
+	else if (info->spe == 'd' || info->spe == 'i')
 		ft_treat_int(info, va_arg(info->args, int));
-//	else if (info->spe  == 'x' || info->spe == 'X' || info->spe == u)
-
+	else if (info->spe == 'u')
+		ft_treat_unsigned(info, va_arg(info->args, unsigned int));
 	else if (info->spe == 's')
 		ft_treat_string(info, va_arg(info->args, char *));
 	else if (info->spe == '%')
 		ft_treat_char(info, '%');
-//	else if (str[info->i] == 'p')
+	else if (info->spe == 'x' || info->spe == 'X')
+		ft_treat_hexa(info, va_arg(info->args, unsigned int));
+	else if (info->spe == 'p')
+		ft_treat_point(info, va_arg(info->args, unsigned long long int));
 }
 
-int		ft_printf(const char *format, ...)
+static int		ft_end(t_info *info, char *str)
+{
+	va_end(info->args);
+	ft_display_buff(info);
+	free(str);
+	return (info->return_value);
+}
+
+int				ft_printf(const char *format, ...)
 {
 	t_info	info;
 	char	*str;
@@ -93,27 +102,12 @@ int		ft_printf(const char *format, ...)
 		if (str[info.i - 1] == '%' && info.i != 0)
 		{
 			ft_parse_flags(&info, str);
-			if (ft_check_type(str[info.i]))
-				ft_exec_flags(&info);
-			else
+			(ft_check_type(str[info.i])) ? ft_exec_flags(&info) :
 				ft_buff_no_flags(&info, str[info.i]);
 		}
 		else if (str[info.i - 1] != '%' && str[info.i] != '%')
 			ft_buff_no_flags(&info, str[info.i]);
 		info.i++;
 	}
-	va_end(info.args);
-	ft_display_buff(&info);
-	free(str);
-	return (info.return_value);
+	return (ft_end(&info, str));
 }
-/*
-int main(void)
-{
-	char c;
-
-	c = 'p';
-	ft_printf("%c", c);
-	ft_printf("\n");
-	ft_printf("%c\n", c);
-}*/
